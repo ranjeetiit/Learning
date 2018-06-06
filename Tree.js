@@ -164,6 +164,14 @@ class Stack{
   isEmpty(){
     return this.size() ? false : true;
   }
+  print(){
+    let len = this.size();
+    let str = "";
+    for (let i = 0; i < len; i++) {
+      str += (this.stack[i] + " ");
+    }
+    console.log(str)
+  }
 }
 
 class Queue{
@@ -225,6 +233,9 @@ console.log("----------BFS----------------")
 tree.bfs(tree.getRoot())
 */
 function sumAtEachLevel(root){
+  if(!root){
+    return;
+  }
   var stack1 = new Stack();
   var stack2 = new Stack();
   var current, level = 0, sum = 0;
@@ -263,9 +274,12 @@ function sumAtEachLevel(root){
   }
 }
 
-sumAtEachLevel(tree.getRoot());
+//sumAtEachLevel(tree.getRoot());
 
 function zigzagTraversal(root){
+  if(!root){
+    return;
+  }
   var stack1 = new Stack();
   var stack2 = new Stack();
   var current;
@@ -294,7 +308,21 @@ function zigzagTraversal(root){
   }
 }
 
-zigzagTraversal(tree.getRoot())
+//zigzagTraversal(tree.getRoot())
 
 
 
+function printPathsFromRootToLeaf(root,stack){
+  if(!root){
+    return;
+  }
+  stack.push(root.data);
+  if(root.left == null && root.right == null){
+    stack.print();
+  }
+  printPathsFromRootToLeaf(root.left,stack);
+  printPathsFromRootToLeaf(root.right,stack);
+  stack.pop();
+}
+
+printPathsFromRootToLeaf(tree.getRoot(),new Stack());
